@@ -4,7 +4,7 @@ You tell Equis where your projects are.
 
 It helps you navigate and manage them.
 
-To Install, see [INSTALL.md](Install.md).
+To Install, see [INSTALL.md](INSTALL.md).
 
 ### Getting Started - The Index
 
