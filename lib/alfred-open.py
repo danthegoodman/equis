@@ -1,7 +1,7 @@
 import equis, sys, json
 
 def main(query):
-    projects = [x for x in equis.read_indexes() if x["opener"]]
+    projects = [x for x in equis.read_config()['index'] if x["opener"]]
     projects = [x for x in projects if fuzzy_score(x, query)]
 
     projects.sort(key= lambda x: x["name"].lower())

@@ -1,7 +1,7 @@
 import equis, sys, json
 
 if sys.argv[1] == "index":
-    projects = equis.read_indexes()
+    projects = equis.read_config()['index']
     if not projects:
         sys.exit("no projects have been indexed; (did you want --help?)")
 elif sys.argv[1] == "all":

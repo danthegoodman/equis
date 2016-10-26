@@ -4,9 +4,9 @@ def main():
     args = parse_arguments()
     new_item = build_index_item(args)
 
-    indexes = equis.read_indexes()
-    old_item = update_indexes(indexes, new_item)
-    equis.write_indexes(indexes)
+    config = equis.read_config()
+    old_item = update_indexes(config['index'], new_item)
+    equis.write_config(config)
 
     report_changes(new_item, old_item)
 

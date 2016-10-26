@@ -4,9 +4,9 @@ def main():
     args = parse_arguments()
     new_item = build_registry_item(args)
 
-    registry = equis.read_registry()
-    old_item = update_registry(registry, new_item)
-    equis.write_registry(registry)
+    config = equis.read_config()
+    old_item = update_registry(config['registry'], new_item)
+    equis.write_registry(config)
 
     report_changes(new_item, old_item)
 

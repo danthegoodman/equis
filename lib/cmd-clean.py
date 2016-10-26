@@ -2,14 +2,12 @@ import equis, argparse, sys, os.path
 
 def main():
     parse_arguments()
-    indexes = equis.read_indexes()
-    registry = equis.read_registry()
+    config = equis.read_config()
 
-    new_indexes = update_indexes(indexes)
-    new_registry = update_registry(registry)
+    config['index'] = update_indexes(config['index'])
+    config['registry'] = update_registry(config.get['registry'])
 
-    equis.write_indexes(new_indexes)
-    equis.write_registry(new_registry)
+    equis.write_config(config)
 
 def parse_arguments():
     parser = argparse.ArgumentParser(prog="equis clean",

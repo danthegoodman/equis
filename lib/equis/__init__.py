@@ -8,26 +8,29 @@ equis_dir = os.environ.get('EQUIS_DIR')
 if not equis_dir:
     sys.exit('Missing environment variable EQUIS_DIR')
 
-def read_indexes():
-    return _read_or_create_json('index.json')
+def read_config():
+    json = _read_or_create_json()
+    if 'index' not in json:
+        json['index'] = []
+    if 'registry' not in json:
+        json['registry'] = []
+    return json
 
-def read_registry():
-    return _read_or_create_json('registry.json')
+def write_config(data):
+    target_file = equis_dir + '/config.json'
 
-def write_indexes(data):
-    _write_json('index.json', data)
-
-def write_registry(data):
-    _write_json('registry.json', data)
+    with open(target_file, 'w') as fp:
+        return json.dump(data, fp)
 
 def all_projects():
-    indexes = read_indexes()
-    registry = read_registry()
+    config = read_config()
+    indexes = config["index"]
+    registry = config["registry"]
 
     yield from indexes
     dirs = set(x['dir'] for x in indexes) | set(x['dir'] for x in registry)
 
-    for regitem in read_registry():
+    for regitem in registry:
         level = regitem['depth']
         currdirs = [regitem['dir']]
         nextdirs = []
@@ -45,21 +48,8 @@ def all_projects():
             nextdirs = []
             level -= 1
 
-    # level = reg_item['depth']
-    # print >>sys.stderr, '---{} ({})---'.format(reg_item['dir'], level)
-    # for root, dirs, files in os.walk(reg_item['dir'], topdown=True, followlinks=True):
-    #     if level >= 0:
-    #         print >>sys.stderr, root
-    #         print >>sys.stderr, dirs
-    #     else:
-    #         break
-    #     level-=1
-    # return []
-
-
-def _read_or_create_json(filename):
-    target_file = equis_dir + '/' + filename
-
+def _read_or_create_json():
+    target_file = equis_dir + '/config.json'
     try:
         with open(target_file, 'r') as fp:
             return json.load(fp)
@@ -74,12 +64,6 @@ def _read_or_create_json(filename):
                 raise e
 
         target = open(target_file, 'w')
-        target.write('[]')
+        target.write('{}')
         target.close()
-        return []
-
-def _write_json(filename, data):
-    target_file = equis_dir + '/' + filename
-
-    with open(target_file, 'w') as fp:
-        return json.dump(data, fp)
+        return {}

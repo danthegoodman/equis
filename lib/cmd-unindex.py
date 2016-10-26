@@ -3,9 +3,9 @@ import equis, argparse, sys
 def main():
     args = parse_arguments()
 
-    indexes = equis.read_indexes()
-    update_indexes(indexes, args.name)
-    equis.write_indexes(indexes)
+    config = equis.read_config()
+    update_indexes(config['index'], args.name)
+    equis.write_config(config)
 
     print("Removed {} from the index".format(args.name))
 
