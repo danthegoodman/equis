@@ -6,7 +6,7 @@ def main():
 
     config = equis.read_config()
     old_item = update_registry(config['registry'], new_item)
-    equis.write_registry(config)
+    equis.write_config(config)
 
     report_changes(new_item, old_item)
 
