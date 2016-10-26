@@ -1,10 +1,11 @@
 [ "$0" = "$BASH_SOURCE" ] && { echo "equis.sh must be sourced"; exit 1 ; }
 local equis_home="$(dirname "$BASH_SOURCE")/lib"
 case "$1" in
-  -yh) ;&
+  -h) ;&
   --help) ;&
   help)
     echo "X - Equis, the project directory manager"
+    echo "Version $(cat "$equis_home"/../VERSION)"
     echo
     echo "Commands"
     echo "  cd           jump to a directory"
