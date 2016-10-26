@@ -1,9 +1,7 @@
 [ "$0" = "$BASH_SOURCE" ] && { echo "equis.sh must be sourced"; exit 1 ; }
 local equis_home="$(dirname "$BASH_SOURCE")/lib"
 case "$1" in
-  -h) ;&
-  --help) ;&
-  help)
+  -h | --help | help)
     echo "X - Equis, the project directory manager"
     echo "Version $(cat "$equis_home"/../VERSION)"
     echo
@@ -27,17 +25,14 @@ case "$1" in
     return 1
     ;;
 
-  "") ;&
-  -*) ;&
-  cd)
+  cd | "" | -*)
     source "$equis_home/cmd-cd.sh" "$@"
     ;;
   a)
     source "$equis_home/cmd-cd.sh" --all "$@"
     ;;
 
-  gst) ;&
-  git-status)
+  git-status | gst)
     shift
     bash "$equis_home/cmd-git-status.sh" "$@"
     ;;
@@ -46,11 +41,7 @@ case "$1" in
     source "$equis_home/cmd-open.sh" "$@"
     ;;
 
-  index) ;&
-  unindex) ;&
-  register) ;&
-  unregister) ;&
-  clean)
+  index | unindex | register | unregister | clean)
     local script="$1"
     shift
     python3 "$equis_home/cmd-${script}.py" "$@"
