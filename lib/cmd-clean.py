@@ -5,7 +5,7 @@ def main():
     config = equis.read_config()
 
     config['index'] = update_indexes(config['index'])
-    config['registry'] = update_registry(config.get['registry'])
+    config['registry'] = update_registry(config['registry'])
 
     equis.write_config(config)
 
