@@ -8,7 +8,7 @@ def main():
     update_registry(config['registry'], target_dir)
     equis.write_config(config)
 
-    print("Removed {} from the index".format(target_dir))
+    print("Removed {} from the registry".format(target_dir))
 
 def parse_arguments():
     parser = argparse.ArgumentParser(prog="equis unregister",
