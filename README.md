@@ -103,7 +103,7 @@ Commands
   git-status   check for uncommitted or unpushed changes
   open         opens a directory in an editor or IDE
 
-Managment
+Management
   index        add a directory to the index
   unindex      remove a directory from the index
   register     add a directory to the registry
@@ -139,3 +139,4 @@ You can use this to perform a custom action over your projects:
 for PROJ in $(x list); do
   [[ -d "$PROJ/.git" ]] && echo "$PROJ :: has git repo" || echo "$PROJ :: not in git"
 done
+```
