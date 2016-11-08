@@ -96,7 +96,7 @@ Similarly, you can check all of these project's for unpushed changes.
 ```text
 $ x --help
 X - Equis, the project directory manager
-Version 1.0.0
+Version 1.1.0
 
 Commands
   cd           jump to a directory
@@ -108,6 +108,7 @@ Managment
   unindex      remove a directory from the index
   register     add a directory to the registry
   unregister   remove a directory from the registry
+  list         list all directories indexed or registered
   clean        remove non-existent directories from the index and registry
 
 Shortcuts
@@ -128,3 +129,13 @@ All commands accept a `--help` flag for additional details.
 If you use and pay for [Alfred](https://www.alfredapp.com/), a workflow is available for the `open` command.
 
 Run the `alfred/open_workflow.py` script in this project.
+
+# Advanced Usage - Scripting
+
+Equis provides the `list` and `list --all` commands to dump indexed and registered directories to standard out.
+You can use this to perform a custom action over your projects:
+
+```bash
+for PROJ in $(x list); do
+  [[ -d "$PROJ/.git" ]] && echo "$PROJ :: has git repo" || echo "$PROJ :: not in git"
+done

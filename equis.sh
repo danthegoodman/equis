@@ -10,11 +10,12 @@ case "$1" in
     echo "  git-status   check for uncommitted or unpushed changes"
     echo "  open         opens a directory in an editor or IDE"
     echo
-    echo "Managment"
+    echo "Management"
     echo "  index        add a directory to the index"
     echo "  unindex      remove a directory from the index"
     echo "  register     add a directory to the registry"
     echo "  unregister   remove a directory from the registry"
+    echo "  list         list all directories indexed or registered"
     echo "  clean        remove non-existent directories from the index and registry"
     echo
     echo "Shortcuts"
@@ -41,7 +42,7 @@ case "$1" in
     source "$equis_home/cmd-open.sh" "$@"
     ;;
 
-  index | unindex | register | unregister | clean)
+  index | unindex | register | unregister | clean | list)
     local script="$1"
     shift
     python3 "$equis_home/cmd-${script}.py" "$@"
