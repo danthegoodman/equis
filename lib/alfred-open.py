@@ -2,10 +2,9 @@ import equis, sys, json
 
 def main(query):
     projects = [x for x in equis.read_config()['index'] if x["opener"]]
-    projects = [x for x in projects if fuzzy_score(x, query)]
+    projects = [x for x in projects if fuzzy_find(x, query)]
 
     projects.sort(key= lambda x: x["name"].lower())
-    projects.sort(key= lambda x: x["score"])
 
     items = [build_item(x) for x in projects]
     print(json.dumps({"items":items}))
@@ -21,18 +20,16 @@ def build_item(proj):
         'quicklookurl': 'file://'+proj['dir'],
     }
 
-def fuzzy_score(proj, query):
+def fuzzy_find(proj, query):
     name = proj['name'].lower()
-    score = 0
-    lastNdx = -1
-    ndx = -1
-    for c in query:
-        ndx = name.find(c, ndx+1)
-        if ndx == -1: return False
-        if lastNdx >= 0:
-            score += (ndx - lastNdx)
-        lastNdx = ndx
-    proj['score'] = score
+    all_words = query.split(" ")
+
+    for word in all_words:
+        ndx = -1
+        for c in word:
+            ndx = name.find(c, ndx+1)
+            if ndx == -1: return False
+
     return True
 
 main(sys.argv[1].lower())
