@@ -136,7 +136,7 @@ Equis provides the `list` and `list --all` commands to dump indexed and register
 You can use this to perform a custom action over your projects:
 
 ```bash
-for PROJ in $(x list); do
+x list | while read PROJ; do
   [[ -d "$PROJ/.git" ]] && echo "$PROJ :: has git repo" || echo "$PROJ :: not in git"
 done
 ```
