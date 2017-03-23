@@ -35,7 +35,7 @@ case "$1" in
 
   git-status | gst)
     shift
-    bash "$equis_home/cmd-git-status.sh" "$@"
+    python3 "$equis_home/cmd-git-status.py" "$@"
     ;;
 
   open)
