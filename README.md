@@ -96,10 +96,11 @@ Similarly, you can check all of these project's for unpushed changes.
 ```text
 $ x --help
 X - Equis, the project directory manager
-Version 1.1.0
+Version 1.2.0
 
 Commands
   cd           jump to a directory
+  git-pull     step through each project and pull changes
   git-status   check for uncommitted or unpushed changes
   open         opens a directory in an editor or IDE
 

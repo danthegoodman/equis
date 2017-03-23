@@ -7,6 +7,7 @@ case "$1" in
     echo
     echo "Commands"
     echo "  cd           jump to a directory"
+    echo "  git-pull     step through each project and pull changes"
     echo "  git-status   check for uncommitted or unpushed changes"
     echo "  open         opens a directory in an editor or IDE"
     echo
@@ -42,7 +43,7 @@ case "$1" in
     source "$equis_home/cmd-open.sh" "$@"
     ;;
 
-  index | unindex | register | unregister | clean | list)
+  index | unindex | register | unregister | clean | list | git-pull)
     local script="$1"
     shift
     python3 "$equis_home/cmd-${script}.py" "$@"
